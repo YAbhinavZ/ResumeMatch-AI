@@ -17,9 +17,22 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 // Global middleware
 // ─────────────────────────────────────────────
 
+const allowedOrigins = [
+  "https://resume-match-ai-one.vercel.app",
+  "https://resume-match-4pkf57vql-abhinav-sharmas-projects-7df32fa8.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 
