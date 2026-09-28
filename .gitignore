@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Generated files
+generated/
+
+# Local/editor/AI tooling
+.vscode/
+.idea/
+.agents/
+.claude/
+.windsurf/
+
+# macOS
+.DS_Store

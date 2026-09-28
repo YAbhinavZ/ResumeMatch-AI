@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  email        String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+
+  analyses     Analysis[]
+}
+
+model Analysis {
+  id                       Int      @id @default(autoincrement())
+
+  resumeFileName           String
+  jobDescriptionFileName   String?
+  jobDescriptionSource     String
+
+  // Keyword-based analysis
+  matchScore               Int
+  finalMatchScore          Int?
+  matchedSkills             Json
+  missingSkills             Json
+
+  // AI-based analysis
+  aiMatchScore             Int?
+  aiSummary                String?
+  aiMatchedSkills          Json?
+  aiMissingSkills          Json?
+  aiStrengths              Json?
+  aiSuggestions            Json?
+
+  // Extracted text metadata
+  resumeTextLength         Int
+  jobDescriptionTextLength Int
+
+  createdAt                DateTime @default(now())
+
+  // Authentication relationship
+  userId                   Int?
+  user                     User?    @relation(fields: [userId], references: [id])
+}
