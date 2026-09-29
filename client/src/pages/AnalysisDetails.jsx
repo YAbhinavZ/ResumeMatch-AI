@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
-
-
+import { API_BASE_URL } from "../services/api";
 
 function getScoreLabel(score) {
   if (score >= 80) return "Excellent match";

@@ -5,8 +5,7 @@ import {
   analyzeResume,
   getAnalysisHistory,
   getAnalysisById,
-  deleteAnalysis
-
+  deleteAnalysis,
 } from "../controllers/analyzer.controller.js";
 
 const router = express.Router();
@@ -22,10 +21,6 @@ router.post(
 );
 router.get("/history", authMiddleware, getAnalysisHistory);
 router.get("/history/:id", authMiddleware, getAnalysisById);
-router.delete(
-  "/history/:id",
-  authMiddleware,
-  deleteAnalysis
-);
+router.delete("/history/:id", authMiddleware, deleteAnalysis);
 
 export default router;
